@@ -1,0 +1,6 @@
+Django==2.2.5
+pillow
+sendgrid
+pytube
+django-compressor
+django-compressor-toolkit

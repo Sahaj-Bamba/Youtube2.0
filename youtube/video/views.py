@@ -11,7 +11,8 @@ from .forms import videoForm
 
 def play(request):
 
-    return render(request,'video/play.html',{})
+    context = {'videofile': "a.mp4" , 'MEDIA_URL': "/media/videos/"}
+    return render(request,'video/play.html',context)
 
 
 def test(request):
@@ -20,12 +21,21 @@ def test(request):
 
 
 def upload(request):
-    # lastvideo = video.objects.last()
 
-    # videofile = lastvideo.videofile
+    # os.mkdir("hi")
 
     form = videoForm(request.POST or None, request.FILES or None)
+    data = request.POST.copy()
     if form.is_valid():
+        form.save()
+        # print(form['videofile'].value())
+        # print(form['id'].value())
+        # x = form.auto_id
+        # print("Jin")
+        # print(x)
+        # temp = video.objects.get(name=form['name'].value())
+
+        # os.system("mv youtube/media/"+temp['videofile']+ "youtube/media/videos/"+form['name']+".mp4")
         form.save()
 
     context = {'form': form}
@@ -34,7 +44,7 @@ def upload(request):
 
 
 def download(request):
-    filepath = '/home/sahaj-bamba/Desktop/webster/Video-Sharing-Portal/youtube/media/videos/videoplayback.mp4'
+    filepath = '/home/sahaj-bamba/Desktop/webster/Video-Sharing-Portal/youtube/media/videos/a.mp4'
     response = HttpResponse(content_type='application/force-download')
     response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(filepath)
     response['X-Sendfile'] = smart_str(filepath)

@@ -3,7 +3,7 @@
     <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 </head>
-
+<div> {{ MEDIA_URL }}{{ videofile }} </div>
 <body>
 <video class='video-js' controls data-setup='{}' height='264' id='my-video' preload='auto' width='640'>
     <source src='{{ MEDIA_URL }}{{ videofile }}' type='video/mp4'>

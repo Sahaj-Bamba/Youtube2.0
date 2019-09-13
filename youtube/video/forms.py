@@ -1,5 +1,6 @@
 import django
 from django import forms
+from django.forms import HiddenInput
 
 from .models import video
 from .models import tag
@@ -8,13 +9,17 @@ from .models import tag
 class videoForm(forms.ModelForm):
     class Meta:
         model = video
-        fields = ["name", "videofile", "owner", "tags"]
+        fields = ["name", "videofile","owner", "tags"]
+
 
         tags = forms.ModelMultipleChoiceField(queryset=tag.objects.all())
 
         # Overriding __init__ here allows us to provide initial
         # data for 'toppings' field
         def __init__(self, *args, **kwargs):
+
+            self.fields['owner'].widgets = HiddenInput()
+
             # Only in case we build the form from an instance
             # (otherwise, 'toppings' list should be empty)
             if kwargs.get('instance'):
@@ -38,8 +43,8 @@ class videoForm(forms.ModelForm):
             def save_m2m():
                 old_save_m2m()
                 # This is where we actually link the pizza with toppings
-                instance.topping_set.clear()
-                instance.topping_set.add(*self.cleaned_data['tags'])
+                instance.tags_set.clear()
+                instance.tags_set.add(*self.cleaned_data['tags'])
 
             self.save_m2m = save_m2m
 

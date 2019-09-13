@@ -22,5 +22,6 @@ urlpatterns = [
     path('base/', include('base.urls', namespace='base')),
     path('auth/', include('auth.urls', namespace='auth')),
     path('Account/', include('Account.urls', namespace='Account')),
+    path('video/', include('video.urls', namespace='video')),
 
 ]

@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css?family=Kodchasan');
+		*{
+			outline: none !important;
+		}
+	body
+	{
+		font-family: 'Kodchasan', sans-serif;
+        	scroll-behavior: smooth;
+        	background: #fafafa;
+	}
+	p
+	{
+    /*font-family: 'Poppins', sans-serif;*/
+     font-size: 1.1em;
+     font-weight: 300;
+     line-height: 1.7em;
+     color: #999;
+    }
+    a, a:hover, a:focus
+    {
+     color: inherit;
+     text-decoration: none;
+     transition: all 0.3s;
+    }
+
+    .wrapper
+    {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+    }
+    #sidebar
+    {
+    	position: fixed;
+    	top: 4%;
+     min-width: 250px;
+     max-width: 250px;
+     min-height: 100vh;
+      background: #7386D5;
+    color: #fff;
+    transition: all 0.3s;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    }
+    #sidebar .sidebar-header
+    {
+     padding: 20px;
+     background: #6d7fcc;
+    }
+    #sidebar.active
+    {
+     margin-left: -250px;
+    }
+    a[data-toggle="collapse"]
+    {
+     position: relative;
+    }
+
+    .dropdown-toggle::after
+    {
+     display: block;
+     position: absolute;
+     top: 50%;
+     right: 20px;
+     transform: translateY(-50%);
+    }
+    /*for smaller screens*/
+     @media (max-width: 768px)
+    {
+     #sidebar
+     {
+        margin-left: -250px;
+     }
+     #sidebar.active
+     {
+        margin-left: 0;
+     }
+    }
+
+    #sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+   .aaa
+   {
+   	 position: absolute;
+   	 right: 40%;
+   	 top: 0%;
+   }
+
+   .mynav
+   {
+   	 background: white;
+   	 z-index: 99999;
+   	 height: 20%;
+   	 box-shadow: 10px 10px 5px #aaaaaa;
+   	 position: relative,fixed;
+   	 top: 0%;
+   	 /*padding-bottom: 0px;*/
+   }
+
+
+   .toggler-btn
+    {
+      border: 2px solid #d3325f;
+      padding: 5px;
+      transition: all 2s ease;
+    }
+
+    .bar
+    {
+      width: 30px;
+      height: 3px;
+      margin: 5px;
+      background: #d3325f ;
+      transition: all 0.5s ease;
+    }
+
+    .change .bar1
+    {
+      transform: rotate(-45deg) translate(-5px,6px);
+    }
+     .change .bar2
+    {
+      opacity: 0;
+    }
+     .change .bar3
+    {
+      transform: rotate(45deg) translate(-5px,-8px);
+    }
+
+    .marginmy
+    {
+       position: absolute;
+       right: 10%;
+       top: 0%;
+    }
+    .nav-link
+    {
+    	/*padding-left: 6px;*/
+      color: #242424;
+      text-decoration: none;
+      transition: all 2s ease;
+      font-size: 15px;
+    }
+    .nav-link:hover
+    {
+      color: #d3325f;
+    }
+
+    .clink
+    {
+    	color: black;
+    }
+
+    .mycard1
+    {
+    	position: absolute;
+    	top: 20%;
+    	left: -42.5%;
+    	/*padding-right: 5px;*/
+    }
+
+    .mycard2
+    {
+    	position: absolute;
+    	top: 20%;
+    	left: 38%;
+    	/*padding-right: 5px;*/
+    }
+
+    .mycard3
+    {
+    	position: absolute;
+    	top: 20%;
+    	left: 119%;
+    	/*padding-right: 5px;*/
+    }
+
+    .mycard4
+    {
+    	position: absolute;
+    	top: 20%;
+    	left: 202%;
+    }
+
+    .mycard5
+    {
+    	position: absolute;
+    	top: 90%;
+    	left: 260%;
+    	/*padding-right: 5px;*/
+    }
+
+    .mycard6
+    {
+    	position: absolute;
+    	top: 90%;
+    	left: 1280%;
+    	/*padding-right: 5px;*/
+    }
+
+    .mycard7
+    {
+    	position: absolute;
+    	top: 90%;
+    	left: 2300%;
+    	/*padding-right: 5px;*/
+    }
+
+    .mycard8
+    {
+    	position: absolute;
+    	top: 90%;
+    	left: 3350%;
+    }
+
+    /*#content
+    {
+    	position: fixed;
+    }*/
+
+
+
+

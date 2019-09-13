@@ -4,14 +4,23 @@ from django.db import models
 # Create your models here.
 
 
-class video(models.Model):
+class videoOrg(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200,unique=True)
     videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
-    owner = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-    tags = models.ManyToManyField('tag')
     # likeCount = models.IntegerField(default=0)
     # viewCount = models.IntegerField(default=0)
+
+
+class video(models.Model):
+    id = models.AutoField(primary_key=True)
+    org = models.ForeignKey(videoOrg, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+    isPrivate = models.BooleanField(default=False)
+    report = models.IntegerField(default=0)
+    tags = models.ManyToManyField('tag')
 
 
 class tag(models.Model):
@@ -19,6 +28,7 @@ class tag(models.Model):
 
     def __str__(self):
         return self.name
+
 
 #
 # class playlist(models.Model):

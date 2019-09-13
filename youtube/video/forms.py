@@ -9,8 +9,7 @@ from .models import tag
 class videoForm(forms.ModelForm):
     class Meta:
         model = video
-        fields = ["name", "videofile","owner", "tags"]
-
+        fields = ["name", "videofile", "tags"]
 
         tags = forms.ModelMultipleChoiceField(queryset=tag.objects.all())
 
@@ -21,7 +20,6 @@ class videoForm(forms.ModelForm):
             self.fields['owner'].widgets = HiddenInput()
 
             # Only in case we build the form from an instance
-            # (otherwise, 'toppings' list should be empty)
             if kwargs.get('instance'):
                 # We get the 'initial' keyword argument or initialize it
                 # as a dict if it didn't exist.
@@ -32,9 +30,9 @@ class videoForm(forms.ModelForm):
 
             forms.ModelForm.__init__(self, *args, **kwargs)
 
-        # Overriding save allows us to process the value of 'toppings' field
+        # Overriding save allows us to process the value of 'tags' field
         def save(self, commit=True):
-            # Get the unsave Pizza instance
+            # Get the unsave Video instance
             instance = forms.ModelForm.save(self, False)
 
             # Prepare a 'save_m2m' method for the form,

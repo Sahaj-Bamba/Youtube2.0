@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block statics %}
+    <link rel="stylesheet" type="text/css" href="{% static 'Account/stylesheet/profile.css' %} " >
+    <script type="text/javascript" src="{% static 'Account/javascript/profile.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+
+    {% for a,b in details.items %}
+
+        <div class="item" >
+            <span class="name" >{{ a }}</span>
+            <span class="value" >{{ b }}</span>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

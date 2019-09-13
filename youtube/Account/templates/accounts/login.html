@@ -1,0 +1,20 @@
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block statics %}
+    <script type="text/javascript" src="{% static 'Account/javascript/proff.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'Account/stylesheet/login.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <form class="my-form" action="{% url 'Account:login' %} " method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type="submit" value="login">
+    </form>
+
+{% endblock %}

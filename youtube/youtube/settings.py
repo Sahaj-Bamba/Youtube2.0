@@ -83,7 +83,7 @@ DATABASES = {
             # 'read_default_file': '/path/to/my.cnf',
         },
         # 'NAME': os.path.join(BASE_DIR, 'testdb'),
-        'NAME': 'youtube',
+        'NAME': 'youtube2',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',

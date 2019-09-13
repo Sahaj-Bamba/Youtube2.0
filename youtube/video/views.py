@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.utils.encoding import smart_str
 from django.views.static import serve
 
-from .models import Video
-from .forms import VideoForm
+from .models import video
+from .forms import videoForm
 
 
 def play(request):
@@ -19,11 +19,11 @@ def test(request):
     return render(request, 'video/demo.html', {})
 
 def upload(request):
-    lastvideo = Video.objects.last()
+    lastvideo = video.objects.last()
 
     videofile = lastvideo.videofile
 
-    form = VideoForm(request.POST or None, request.FILES or None)
+    form = videoForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
 

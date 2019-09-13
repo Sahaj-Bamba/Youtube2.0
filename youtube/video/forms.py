@@ -1,9 +1,9 @@
 from django.contrib.contenttypes import forms
 
-from video.models import Video
+from .models import video
 
 
-class VideoForm(forms.ModelForm):
+class videoForm(forms.ModelForm):
     class Meta:
-        model = Video
-        fields = ["name", "videofilee"]
+        model = video
+        fields = ["name", "videofile"]

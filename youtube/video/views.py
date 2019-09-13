@@ -19,15 +19,15 @@ def test(request):
     return render(request, 'video/demo.html', {})
 
 def upload(request):
-    lastvideo = video.objects.last()
+    # lastvideo = video.objects.last()
 
-    videofile = lastvideo.videofile
+    # videofile = lastvideo.videofile
 
     form = videoForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
 
-    context = {'videofile': videofile, 'form': form}
+    context = { 'form': form}
 
     return render(request, 'video/upload.html', context)
 

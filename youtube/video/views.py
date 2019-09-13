@@ -18,6 +18,7 @@ def test(request):
 
     return render(request, 'video/demo.html', {})
 
+
 def upload(request):
     # lastvideo = video.objects.last()
 
@@ -27,7 +28,7 @@ def upload(request):
     if form.is_valid():
         form.save()
 
-    context = { 'form': form}
+    context = {'form': form}
 
     return render(request, 'video/upload.html', context)
 

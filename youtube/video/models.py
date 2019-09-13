@@ -17,4 +17,4 @@ class tag(models.Model):
     name = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.name + ": " + str(self.videofile)
+        return self.name

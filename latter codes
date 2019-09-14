@@ -1,0 +1,5 @@
+
+
+
+
+        cmp --silent b.mp4 c.mp4 ^C echo "files are different"

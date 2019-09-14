@@ -8,7 +8,7 @@
 <h1>Video Uploader</h1>
 <form action="" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <input type="file" name="videofile" required id="id_videofile"></p>
     <input type="submit" value="Upload"/>
 </form>
 

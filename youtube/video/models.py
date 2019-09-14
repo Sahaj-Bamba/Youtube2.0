@@ -6,15 +6,12 @@ from django.db import models
 
 class videoOrg(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=200,unique=True)
     videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
-    # likeCount = models.IntegerField(default=0)
-    # viewCount = models.IntegerField(default=0)
 
 
 class video(models.Model):
     id = models.AutoField(primary_key=True)
-    org = models.ForeignKey(videoOrg, on_delete=models.CASCADE)
+    org = models.ForeignKey(videoOrg, on_delete=models.CASCADE, null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)

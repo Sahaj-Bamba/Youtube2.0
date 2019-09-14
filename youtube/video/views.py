@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.utils.encoding import smart_str
 from django.views.static import serve
 
-from .models import video
 from .forms import videoForm
+from .models import video
 
 
 def play(request):

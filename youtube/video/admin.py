@@ -3,3 +3,4 @@ from . import models
 
 admin.site.register(models.video)
 admin.site.register(models.tag)
+admin.site.register(models.videoOrg)

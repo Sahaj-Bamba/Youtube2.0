@@ -1,40 +1,86 @@
 {% extends 'video/base.html' %}
 
 {% block statics %}
+
+
+
 <script type="text/javascript">
+
 $(document).ready(function(){
-    var maxField = 10; //Input fields increment limitation
     var addButton = $('.add_button'); //Add button selector
     var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = '<div><input type="text" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html
-    var x = 1; //Initial field counter is 1
+    var x = 1;
 
-    //Once add button is clicked
     $(addButton).click(function(){
-        //Check maximum number of input fields
-        if(x < maxField){
-            fieldHTML = '<div><input type="text" name="field_name['+x+']" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html
-            x++; //Increment field counter
-            $(wrapper).append(fieldHTML); //Add field html
-        }
+
+        fieldHTML = '<div><input type="text" name="field_name['+x+']" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html
+        x++;
+        $(wrapper).append(fieldHTML);
+
     });
 
-    //Once remove button is clicked
+
     $(wrapper).on('click', '.remove_button', function(e){
         e.preventDefault();
         $(this).parent('div').remove(); //Remove field html
         x--; //Decrement field counter
     });
+
+
+
+    $('input[type="submit"]').prop("disabled", true);
+    var a = 0;
+    $('#id_videofile').bind('change', function () {
+        if ($('input:submit').attr('disabled', false)) {
+            $('input:submit').attr('disabled', true);
+        }
+        var ext = $('#id_videofile').val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['mp4']) == -1) {
+            $('#error1').slideDown("slow");
+            $('#error2').slideUp("slow");
+            a = 0;
+        } else {
+            var size = (this.files[0].size);
+            if (size > 100000) {
+                $('#error2').slideDown("slow");
+                a = 0;
+            } else {
+                a = 1;
+                $('#error2').slideUp("slow");
+            }
+            $('#error1').slideUp("slow");
+            if (a == 1) {
+                $('input:submit').attr('disabled', false);
+            }
+        }
+
+
+    });
+
 });
+
+
 </script>
+
+
+
+
 {% endblock %}
 
 
 {% block content %}
+
 <h1>Video Uploader</h1>
-    <form action="" enctype="multipart/form-data" method="POST">
+
+    <form action="" enctype="multipart/form-data" method="POST" name="form">
         {% csrf_token %}
         {{form.as_p}}
+        <p id="error1" style="display:none; color:#FF0000;">
+            Invalid Video Format! Video Format Must Be MP4.
+        </p>
+        <p id="error2" style="display:none; color:#FF0000;">
+            Maximum File Size Limit is 100MB.
+        </p>
         {{form2}}
 <!--        <input type="file" name="videofile" required id="id_videofile">-->
         <div class="field_wrapper">
@@ -45,5 +91,7 @@ $(document).ready(function(){
         </div>
         <input type="submit" value="Upload"/>
     </form>
+
+
 {% endblock %}
 

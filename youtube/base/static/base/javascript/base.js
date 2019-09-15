@@ -25,7 +25,6 @@ navigator.getBattery().then((battery) => {
 });
 
 
-
 $(document).ready(function () {
 
     $('#sidebarCollapse').on('click', function () {
@@ -33,4 +32,3 @@ $(document).ready(function () {
     });
 
 });
-

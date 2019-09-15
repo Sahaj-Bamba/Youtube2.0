@@ -1,0 +1,343 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link href="path/to/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+    <title>{% block title %}
+
+        {% endblock %}</title>
+
+
+    <!--    Including Jquery and Bootstrap            -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<!--    &lt;!&ndash; Bootstrap CSS CDN &ndash;&gt;-->
+<!--    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"-->
+<!--          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" rel="stylesheet">-->
+
+    <!-- Our Custom CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Font Awesome JS -->
+    <script crossorigin="anonymous" defer
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+            src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
+    <script crossorigin="anonymous" defer
+            integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+            src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <!--    Setting icon -->
+    <link href="{% static 'main_icon.ico' %}" rel="icon" type="image/x-icon">
+
+    <!--        Base stylesheet and java script     -->
+
+    <script src="{% static 'base/javascript/base.js' %}" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'base/stylesheet/base.css' %} " >
+
+
+    <!--        Specific page stylesheet and java script    -->
+    {% block statics %}
+    {% endblock %}
+
+
+
+
+</head>
+
+<body>
+
+<div id="content">
+    <nav class="navbar navbar-expand-lg navbar-light mynav">
+        <div class="collapse navbar-collapse">
+
+            <button class="btn btn-info" id="sidebarCollapse" type="button">
+                <i class="fas fa-align-left"></i>
+                <span>Utilities</span>
+            </button>
+
+            <b style="font-size: 20px;">YouTube</b>
+
+            <form class="form-inline my-2 my-lg-0 aaa">
+                <input aria-label="Search" class="form-control mr-sm-2" placeholder="Search" type="search">
+                <button class="btn btn-primary btn-md btn-lg my-2 " type="submit">Search</button>
+            </form>
+
+            <!-- labels st-->
+            <button class="navbar-toggler" data-target="#myNavbar" data-toggle="collapse" type="button">
+                <div class="toggler-btn">
+                    <div class="bar bar1"></div>
+                    <div class="bar bar2"></div>
+                    <div class="bar bar3"></div>
+                </div>
+            </button>
+            <!--links-->
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="navbar-nav marginmy">
+                    <!-- <li class="nav-item">
+                       <a href="#about" class="nav-link text-capitalize">Upload Vedio</a>
+                   </li>
+                    <li class="nav-item">
+                       <a href="#" class="nav-link text-capitalize">Go Live</a>
+                   </li>
+                    <li class="nav-item">
+                       <a href="#" class="nav-link text-capitalize">Messages</a>
+                     </li> -->
+                    <!-- <li class="nav-item"> -->
+                    <!-- <a href="#" class="nav-link text-capitalize">Notifications</a>  -->
+                    <!-- </li> -->
+                    <li class="nav-item dropdown" style="position: relative; left: 0%;">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           href="#" id="navbarDropdown" role="button">
+                            a
+                        </a>
+                        <div aria-labelledby="navbarDropdown" class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Go Live</a>
+                            <a class="dropdown-item" href="#">Upload Vedio</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Notifications</a>
+                        </div>
+                    </li>&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    {% if 'gamer' in request.session %}
+
+                    &nbsp&nbsp&nbsp&nbsp<b style='font-size:20px;'>Hello, </b>
+
+
+                    {% else %}
+
+        	        <br><br><br><br>
+                    <li class="nav-item">
+                        <a class="nav-link text-capitalize" href="log.php">Sign In</a>
+                    </li>
+
+                    {% endif %}
+
+                    <li class="nav-item dropdown" style="position: relative; left: 0%;">
+                        <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                           href="#" id="navbarDropdown2" role="button">
+                            Profile
+                        </a>
+                        <div aria-labelledby="navbarDropdown2" class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
+                            <!-- <div class="dropdown-divider"></div> -->
+                            <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- labels en -->
+        </div>
+    </nav>
+</div>
+
+
+{% block content %}
+
+{% endblock %}
+
+<!-- main content starts -->
+
+
+    <!-- <div class="row" style="position: absolute; top: 80%;">
+      <div class="col-4">
+
+       <div class="col-9 col-sm-6 col-lg-4 mx-auto my-4">
+        <div class="card text-white bg-dark" style="width:  30rem; display: table;">
+          <img src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <ul class="list-group list-group-flush">
+              <a href="#"><li class="list-group-item clink">Watch</li></a>
+              <a href="#"><li class="list-group-item clink">Save to playlist</li></a>
+              <a href="#"><li class="list-group-item clink">Not interested</li></a>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+       <div class="col-9 col-sm-6 col-lg-4 mx-auto my-4">
+        <div class="card text-white bg-dark" style="width:  30rem; display: table;">
+          <img src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <ul class="list-group list-group-flush">
+              <a href="#"><li class="list-group-item clink">Watch</li></a>
+              <a href="#"><li class="list-group-item clink">Save to playlist</li></a>
+              <a href="#"><li class="list-group-item clink">Not interested</li></a>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-9 col-sm-6 col-lg-4 mx-auto my-4">
+        <div class="card text-white bg-dark" style="width:  30rem; display: table;">
+          <img src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <ul class="list-group list-group-flush">
+              <a href="#"><li class="list-group-item clink">Watch</li></a>
+              <a href="#"><li class="list-group-item clink">Save to playlist</li></a>
+              <a href="#"><li class="list-group-item clink">Not interested</li></a>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+       <div class="col-9 col-sm-6 col-lg-4 mx-auto my-4">
+        <div class="card text-white bg-dark" style="width:  30rem; display: table;">
+          <img src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <ul class="list-group list-group-flush">
+              <a href="#"><li class="list-group-item clink">Watch</li></a>
+              <a href="#"><li class="list-group-item clink">Save to playlist</li></a>
+              <a href="#"><li class="list-group-item clink">Not interested</li></a>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+
+
+
+<!-- main content ends -->
+
+
+<div class="wrapper">
+
+
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Utilities</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>Dummy Heading</p> -->
+            <li class="active">
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#homeSubmenu">Home</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Trending</a>
+                    </li>
+                    <li>
+                        <a href="#">Subscriptions</a>
+                    </li>
+                </ul>
+            </li>
+            <!--   <li>
+                  <a href="#">Library</a>
+                </li> -->
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#pageSubmenu">Library</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">History</a>
+                    </li>
+                    <li>
+                        <a href="#">Watch Later</a>
+                    </li>
+                    <li>
+                        <a href="#">Liked Vedios</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Portfolio</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+                {% if 'gamer' in request.session %}
+
+                {% else %}
+
+            <li>
+                <i aria-hidden="true" class="fas fa-hand-point-down icons"
+                   style="font-size: 40px; padding-left: 10px;"></i>
+                <div><a href="log.php">Sign in</a> to like videos, comment, and subscribe.</div>
+            </li>
+
+                {% endif %}
+
+        </ul>
+    </nav>
+
+</div>
+
+<!-- sidebar ends -->
+<!-- <section class="main">
+     <div class="container-fluid">
+         <div class="row">
+             <div class=" col-sm-6 col-lg-4 mx-auto my-4">
+             <div class="card" style="width: 18rem;">
+            <img src="https://marketplace.canva.com/MADE1T8EShI/1/screen_2x/canva-stacking-social-media-apps-in-virtual-reality-MADE1T8EShI.png" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+         </div>
+         </div>
+
+
+     </div>
+
+
+
+
+
+
+
+  </section> -->
+
+
+<!-- sidebar toggler -->
+<!-- <div id="content">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>
+
+    </div>
+ </nav>
+</div> -->
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+
+<!--        Footer      -->
+
+<div class="footer" style="position: absolute; left: 0px; bottom: 0px; width: 100%; height: 5%;">
+    <div class="txt">
+        &nbsp;&nbsp;Copyright © 2019 Design by <br>&nbsp;&nbsp;&nbsp;&nbsp;Shimigamis
+    </div>
+</div>
+
+
+</body>
+
+</html>

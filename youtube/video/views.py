@@ -1,12 +1,13 @@
 import os
 
+from MySQLdb import connections
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.encoding import smart_str
 from django.views.static import serve
 
-from .forms import videoForm
-from .models import video
+from .forms import videoForm, videoData
+from .models import video, tag, videoOrg
 
 
 def play(request):
@@ -17,30 +18,100 @@ def play(request):
 
 def test(request):
 
-    return render(request, 'video/demo.html', {})
+    x = videoOrg.objects.last()
+    # x.v
+    # cursor = connections["youtube2"].cursor()
+    # cursor.execute("select videofile from video_videoorg where id2 = "+x.id2)
+    # res = dictfetchall(cursor)
+    # serve(request, os.path.basename(filepath), os.path.dirname(filepath))
+
+    return render(request, 'video/test2.html', {})
+
+
+# def upload(request):
+#     # lastvideo = video.objects.last()
+#
+#     # videofile = lastvideo.videofile
+#
+#     form = videoForm(request.POST or None, request.FILES or None)
+#     if form.is_valid():
+#         form.save()
+#
+#     context = {'form': form}
+#
+#     return render(request, 'video/upload.html', context)
+
+
+
 
 
 def upload(request):
 
+    form = videoForm(request.POST or None, request.FILES or None)
+    form2 = videoData(request.POST or None)
+
+    if request.method == 'POST':
+        x = form
+        data = request.POST.copy()
+        if x.is_valid():
+            x.save()
+            z = videoOrg.objects.last()
+            os.system("mv youtube/media/\"" + z.videofile.name + "\" youtube/media/videos/" + str(z.id2) + ".mp4")
+            z.videofile.name = "videos/" + str(z.id2) + ".mp4"
+            z.save()
+            form2.save()
+            y = video.objects.last()
+            print("diii")
+            print(data.get('field_name'))
+            i=0
+            while True :
+                if 'field_name['+str(i)+']' in data:
+                    if len(data.get('field_name['+str(i)+']')) <= 0 :
+                        continue
+                        pass
+                    if len(tag.objects.filter(name=data.get('field_name['+str(i)+']'))) > 0:
+                        tmp = tag.objects.get(name=data.get('field_name['+str(i)+']'));
+                    else:
+                        tmp = tag()
+                        tmp.name = data.get('field_name['+str(i)+']')
+                        tmp.save()
+                    y.tags.add(tmp)
+                    i += 1
+                    pass
+                else:
+                    break
+                    pass
+                pass
+            y.owner = request.user
+            y.org = z
+            y.save()
+        print(x)
+        print(data)
+        return render(request, 'video/test2.html', {'data':data})
+
+    context = {'form': form, 'form2': form2}
+    return render(request, 'video/upload.html', context)
+
     # os.mkdir("hi")
 
-    form = videoForm(request.POST or None, request.FILES or None)
-    data = request.POST.copy()
-    if form.is_valid():
-        form.save()
-        # print(form['videofile'].value())
-        # print(form['id'].value())
-        # x = form.auto_id
-        # print("Jin")
-        # print(x)
-        # temp = video.objects.get(name=form['name'].value())
+    # if form.is_valid():
+    #     form.save()
+    #     print(form2.name)
+    #     print(form2.description)
+    #     # form2.name =
+    #     form2.save()
+    #     # print(form['videofile'].value())
+    #     # print(form['id'].value())
+    #     # x = form.auto_id
+    #     # print("Jin")
+    #     # print(x)
+    #     # temp = video.objects.get(name=form['name'].value())
+    #
+    #     # form.save()
+    #
+    # # if form2.is_valid():
 
-        # os.system("mv youtube/media/"+temp['videofile']+ "youtube/media/videos/"+form['name']+".mp4")
-        form.save()
 
-    context = {'form': form}
-
-    return render(request, 'video/upload.html', context)
 
 
 def download(request):
@@ -51,7 +122,6 @@ def download(request):
     return response
 
 
-            # serve(request, os.path.basename(filepath), os.path.dirname(filepath))
 
 
 

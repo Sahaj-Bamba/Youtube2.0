@@ -11,6 +11,12 @@ class videoForm(forms.ModelForm):
         model = videoOrg
         fields = ["videofile"]
 
+
+class videoData(forms.ModelForm):
+    class Meta:
+        model = video
+        fields = ["name", "description"]
+
 # class videoForm(forms.ModelForm):
 #     class Meta:
 #         model = video

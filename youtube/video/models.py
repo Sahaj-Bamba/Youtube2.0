@@ -32,6 +32,20 @@ class tag(models.Model):
         return self.name
 
 
+class comment(models.Model):
+    id = models.AutoField(primary_key=True)
+    vidid = models.ForeignKey(video, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
+    report = models.IntegerField(default=0)
+    content = models.CharField(max_length=500, default="")
+
+
+class connection(models.Model):
+    c1 = models.CharField(max_length=200)
+    c2 = models.CharField(max_length=200)
+
 #
 # class playlist(models.Model):
 #     name = models.CharField(max_length=500)

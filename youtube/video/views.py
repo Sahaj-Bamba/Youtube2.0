@@ -1,9 +1,10 @@
 import os
 
 from MySQLdb import connections
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.utils.encoding import smart_str
+from django.views.decorators.csrf import csrf_exempt
 from django.views.static import serve
 
 from .forms import videoForm, videoData
@@ -18,17 +19,39 @@ def play(request):
     context = {'videofile': vfile , 'MEDIA_URL': "/media/"}
     return render(request,'video/play.html',context)
 
+@csrf_exempt
+def add_comment(request):
+    # if request.method == 'GET':
+    #     print("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+    #
+    # print("dieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    # pass
+    # data = ""
+    # return render(request, 'video/test2.html', {'data':data})
+
+    data = {
+        'is_taken':True
+    }
+
+    return JsonResponse(data)
+
+def comment(request):
+
+
+    return render(request,'video/comment.html',{})
+
 
 def test(request):
+    data = ""
+    os.system("abc.sh a.mp4 ")
+    # # os.system("mkdir hi")
+    # # os.system("hello > hi.txt")
+    # f = open('media/video/ax.txt', 'r')
+    # file_content = f.read()
+    # data = file_content
+    # f.close()
 
-    x = videoOrg.objects.last()
-    # x.v
-    # cursor = connections["youtube2"].cursor()
-    # cursor.execute("select videofile from video_videoorg where id2 = "+x.id2)
-    # res = dictfetchall(cursor)
-    # serve(request, os.path.basename(filepath), os.path.dirname(filepath))
-
-    return render(request, 'video/test2.html', {})
+    return render(request, 'video/test2.html', {'data':data})
 
 
 def upload(request):
@@ -44,7 +67,10 @@ def upload(request):
             x.save()
             z = videoOrg.objects.last()
             os.system("mv youtube/media/\"" + z.videofile.name + "\" youtube/media/videos/" + str(z.id2) + ".mp4")
-
+            os.system("bash youtube/media/video/abc.sh "+str(z.id2)+" ");
+            f = open('youtube/media/video/ax.txt', 'r')
+            file_content = f.read()
+            f.close()
             z.videofile.name = "videos/" + str(z.id2) + ".mp4"
             z.save()
             form2.save()

@@ -1,0 +1,93 @@
+{% extends 'video/base.html' %}
+
+
+{% block content %}
+
+	<h1 style="color:green;">
+		GeeksforGeeks
+	</h1>
+	<h2>
+		Window prompt() Method
+	</h2>
+
+	<button onclick="geek()">
+		Click me!
+	</button>
+	<p id="g"></p>
+
+	<script>
+
+		function load() {
+
+    $.get("video/add_comment",
+    {
+        commentId : "5d752d18a3efe94b60821b02",
+    },
+    function(status) {
+
+    	console.log("gjafsjysaffsa")
+
+	});
+
+   //
+	// $.ajax({
+   //  type: 'GET',
+   //  url: '/video/add_comment/',
+   //  async: true,
+   //  dataType: 'json',
+   //  data: { },
+   //  done: function(results) {
+   //      console.log('did');
+   //  	// JSON.parse(results);
+   //      return results;
+   //  },
+   //  fail: function( jqXHR, textStatus, errorThrown ) {
+   //      console.log( 'Could not  ' );
+   //  }
+   // });
+
+	// var username = $(this).val();
+	//
+    //   $.ajax({
+    //     url: '/video/add_comment/',
+    //     data: {
+    //       'username': "hjsacbhk"
+    //     },
+    //     dataType: 'json',
+	// 	  async : 'false',
+    //     success: function (data) {
+    //         alert("A user with this username already exists.");
+    //       console.log("hi");
+    //     }
+    //   });
+
+
+
+
+
+
+
+
+			// var xhttp = new XMLHttpRequest();
+		  	// xhttp.onreadystatechange = function() {
+			// if (this.readyState == 4 && this.status == 200) {
+			// 	document.getElementById("demo").innerHTML = this.responseText;
+			// 	}
+		  	// };
+		  	// xhttp.open("POST", "/video/add_comment/" , true);
+			// xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			// xhttp.send("PID=Henry&content=Ford&owner=ax&type=1&csrf={{ csrf_token }}");
+		}
+
+		function geek() {
+			load();
+			// var doc = prompt("Please enter some text",
+			// 	"GeeksforGeeks");
+			// if (doc != null) {
+			// 	document.getElementById("g").innerHTML =
+			// 		"Welcome to " + doc;
+			// }
+		}
+
+	</script>
+{% endblock %}

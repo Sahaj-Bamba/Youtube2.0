@@ -1,107 +1,317 @@
-{% load static  %}
+{% load static %}
 
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-	<head>
-		<title>
-            {% block title %}
-            {% endblock %}
-        </title>
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet"
+          type="text/css">
+    <title>{% block title %}    {% endblock %}</title>
 
-        <!--    fixing viewport scale            -->
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Kodchasan');
+   *{
+       outline: none !important;
+   }
 
-        <!--    Including Jquery and Bootstrap            -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   body {
+       font-family: 'Kodchasan', sans-serif;
+       /*background: #fafafa;*/
+       scroll-behavior: smooth;
+        }
 
-        <!--    Setting icon -->
-	    <link rel="icon" type="image/x-icon" href="{% static 'main_icon.ico' %}">
+        p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.7em;
+            color: #999;
+        }
 
-        <!--        Base stylesheet and java script     -->
-        <link rel="stylesheet" type="text/css" href="{% static 'base/stylesheet/base.css' %}">
-	    <script type="text/javascript" src="{% static 'base/javascript/base.js' %}"></script>
+        a, a:hover, a:focus {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
 
-        <!--        Specific page stylesheet and java script    -->
-        {% block statics %}
-        {% endblock %}
-    </head>
+        .navbar {
+            padding: 15px 10px;
+            background: #fff;
+            border: none;
+            border-radius: 0;
+            margin-bottom: 40px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-btn {
+            box-shadow: none;
+            border: none;
+            outline: none !important;
+        }
+
+        .line {
+            width: 100%;
+            height: 1px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .wrapper {
+            display: flex;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        #sidebar {
+            min-width: 250px;
+            max-width: 250px;
+            background: #7386D5;
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        #sidebar.active {
+            margin-left: -250px;
+        }
+
+        #sidebar .sidebar-header {
+            padding: 20px;
+            background: #6d7fcc;
+        }
+
+        #sidebar ul.components {
+            padding: 20px 0px;
+            border-bottom: 1px solid #47748b;
+        }
+
+        #sidebar ul p {
+            padding: 10px;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        #sidebar ul li a {
+            padding: 10px;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        #sidebar ul li a:hover {
+            color: #7386D5;
+            background: #fff;
+        }
+
+        #sidebar ul li.active > a, a[aria-expanded="true"] {
+            color: #fff;
+            background: #6d7fcc;
+        }
+
+        a[data-toggle="collpase"] {
+            position: relative;
+        }
+
+        .dropdown-toggle:after {
+            display: block;
+            position: absolute;
+            top: 60%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+
+        ul ul a {
+            font-size: 0.9em !important;
+        }
+
+        ul.CTAs {
+            padding: 20px;
+        }
+
+        ul.CTAs a {
+            font-size: 0.9em !important;
+            text-align: center;
+            display: block;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        a.download {
+            background: #fff;
+            color: #7386D5;
+        }
+
+        a.article, a.article:hover {
+            background: #6d7fcc !important;
+            color: #fff !important;
+        }
+
+        #content {
+            width: 100%;
+            padding: 20px;
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            #sidebar {
+                margin-left: -250px;
+            }
+
+            #sidebar.active {
+                margin-left: 0px;
+            }
+
+            #sidebarCollpase span {
+                display: none;
+            }
+
+        }
+
+    </style>
 
 
-	<body style="height: 100vh; width: 100%;">
-        <div id="back_container" style="height: 100%;width: 100%;background-color: #e4e4e4; position: fixed; left: 0px; top: 0px; ">
+    {% block statics %}
+    {% endblock %}
 
-            <!--        Header      -->
-            <!--        Navbar      -->
 
-            <nav class="navbar navbar-fixed-top navbar-inverse" >
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <!--  Button for collapse of main nav bar  -->
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-bar">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <div class="active"><a class="navbar-brand active" href="{% url 'base:home' %}">Youtube</a>
-                        </div>
-                    </div>
-                    <div class="collapse navbar-collapse" id="main-nav-bar">
-                        <ul class="nav navbar-nav">
-                            {% if user.is_authenticated %}
-                                <!--        Stuff to appear after login         -->
-
-{#                                <li ><a href="{% url 'Account:profile' %}">Profile</a></li>#}
-                            {%  endif %}
-                                <!--        Stuff before login                  -->
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right" >
-
-                            {% if user.is_authenticated %}
-
-                                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"> {{ user.username }} <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <!--            user logged in drop-downs               -->
-{#                                        <li><a href="{% url 'Account:profile' %}">Profile</a></li>#}
-                                        <li>
-                                            <form class="logout-link" action="" method="post">
-                                                {% csrf_token %}
-                                                <button type="submit"> Logout </button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                            {% else %}
-
-                                <li><a href=" "><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-
-                            {% endif %}
-
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <!--        Main base       -->
-
-            <div class="main" style="max-height: 100%; height: 100%; min-height: 570px; width: 100%;left: 0px;top: 0px;">
-
-                {% block content %}
-
-                {% endblock %}
-
-            </div>
-
-            <!--        Footer      -->
-
-            <div class="footer"  style="position: absolute; left: 0px; bottom: 0px; width: 100%; height: 5%;">
-                <div class="txt">
-                    Copyright © 2019  Design by Shimigamis
-                </div>
-            </div>
+</head>
+<body>
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Youtube</h3>
         </div>
-	</body>
+        <ul class="list-unstyled components">
+            <p>Dummy Heading</p>
+            <li class="active">
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#homeSubmenu">Utilities</a>
+                <ul class="collpase  list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="/base/home/">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">Trending</a>
+                    </li>
+                    <li>
+                        <a href="#">Subscriptions</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- <li>
+                <a href="#">About</a>
+            </li> -->
+            <li>
+                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#pageSubmenu">Library</a>
+                <ul class="collpase  list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">History</a>
+                    </li>
+                    <li>
+                        <a href="#">Watch Later</a>
+                    </li>
+                    <li>
+                        <a href="#">Liked Vedios</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- <li>
+                <a href="#">Services</a>
+            <!</li> -->
+            <li>
+                <a href="#">Contact Us</a>
+            </li>
+
+        </ul>
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a class="download" href="#">Downlaod Code</a>
+            </li>
+            <li>
+                <a class="download" href="#">Article</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="btn btn-info" id="sidebarCollpase">
+                <i aria-hidden="true" class="fa fa-align-justify"></i> <span>Toggle Sidebar</span>
+            </button>
+
+
+            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+            <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                    data-target="#navbarNav" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <form class="form-inline my-2 my-lg-0">
+                    <input aria-label="Search" class="form-control mr-sm-2" placeholder="Search" type="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Upload Vedio <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Go Live</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Notifications</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li> -->
+                </ul>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/login/">Sign in</a>
+                </li>
+                {% endif %}
+
+            </div>
+        </nav>
+
+        <p>Youtube :- Want to watch some crazy stuff or upload some then what are you waiting for fire up that regester button right now and get immersed in our upside down crazy world of fun , adventure and how can I miss it !!! videos... </p>
+        <div class="line">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script crossorigin="anonymous"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollpase').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+
+</body>
 </html>

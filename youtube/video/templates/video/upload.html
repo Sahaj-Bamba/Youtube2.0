@@ -1,4 +1,4 @@
-{% extends 'video/base.html' %}
+{% extends 'base.html' %}
 
 {% block statics %}
 
@@ -69,7 +69,7 @@ $(document).ready(function(){
 
 
 {% block content %}
-
+  <div class="jumbotron">
 <h1>Video Uploader</h1>
 
     <form action="" enctype="multipart/form-data" method="POST" name="form">
@@ -89,9 +89,9 @@ $(document).ready(function(){
             <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
         </div>
         </div>
-        <input type="submit" value="Upload"/>
+        <input type="submit" value="Upload" class="btn btn-info "/>
     </form>
+    </div>
 
 
 {% endblock %}
-

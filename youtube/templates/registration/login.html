@@ -4,6 +4,29 @@
 {% block title %}{% trans "Log in" %}{% endblock %}
 
 {% block content %}
+
+<style type="text/css">
+            #id_username
+            {
+               outline: none;
+               border: none;
+               border-bottom: 2px solid brown;
+               border-radius: 20px;
+               width: 100%;
+               text-align: center;
+            }
+
+
+            #id_password
+            {
+                outline: none;
+               border: none;
+               border-bottom: 2px solid brown;
+               border-radius: 20px;
+               width: 100%;
+               text-align: center;
+            }
+  </style>
 <form method="post" action="">
     {% csrf_token %}
     {{ form.as_p }}

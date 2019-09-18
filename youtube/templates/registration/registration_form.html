@@ -3,17 +3,62 @@
 
 {% block title %}{% trans "Register for an account" %}{% endblock %}
 
+
+
 {% block content %}
 
-<br>
-<br>
-<br>
-<br>
+<style type="text/css">
+
+        #id_username
+        {
+           outline: none;
+           border: none;
+           border-bottom: 2px solid blue;
+           border-radius: 10px;
+           text-align: center;
+        }
+
+        #id_email
+        {
+            outline: none;
+           border: none;
+           border-bottom: 2px solid blue;
+           border-radius: 10px;
+           text-align: center;
+        }
+
+        #id_password1
+        {
+            outline: none;
+           border: none;
+           border-bottom: 2px solid blue;
+           border-radius: 10px;
+           text-align: center;
+        }
+
+        #id_password2
+        {
+            outline: none;
+           border: none;
+           border-bottom: 2px solid blue;
+           border-radius: 10px;
+           text-align: center;
+        }
+
+      </style>
+
+      <div class="jumbotron">
+                 <h3 class="display-3" style="position: relative; left: 30%;">USER DETAILS</h3>
 <form method="post" action="">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="{% trans 'Submit' %}" />
+    <p class="required"><label class="required" for="id_username" style="position: relative; left: 30%;">Username:</label> <input type="text" name="username" maxlength="150" autofocus required id="id_username" style="position: relative; left: 35%"><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
+                        <p class="required"><label class="required" for="id_email"  style="position: relative; left: 30%;" >E-mail:</label>
+                            <input type="email" name="email" required id="id_email"  style="position: relative; left: 37.5%"></p>
+                        <p class="required"><label class="required" for="id_password1" style="position: relative; left: 30%;">Password:</label> <input type="password" name="password1" required id="id_password1" style="position: relative; left: 35.2%;"> <span class="helptext"><ul style="position: relative; left: 30%;"><li>Your password can&#39;t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can&#39;t be a commonly used password.</li><li>Your password can&#39;t be entirely numeric.</li></ul></span></p>
+                        <p class="required"><label class="required" for="id_password2" style="position: relative; left: 24%;">Password confirmation:</label> <input type="password" name="password2" required id="id_password2" style="position: relative; left: 27%;"><br> <span class="helptext">Enter the same password as before, for verification.</span></p>    <input type="submit" value="{% trans 'Submit' %}" />
 </form>
+</div>
+
 {% endblock %}
 
 

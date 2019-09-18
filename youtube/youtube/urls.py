@@ -26,7 +26,7 @@ urlpatterns = [
     path('auth/', include('auth.urls', namespace='auth')),
     path('Account/', include('Account.urls', namespace='Account')),
     path('video/', include('video.urls', namespace='video')),
+    path('chat/',include('chat.urls', namespace='chat')),
     url(r'^account/', include('registration.backends.default.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
-

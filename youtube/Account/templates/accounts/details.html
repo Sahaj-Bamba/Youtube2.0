@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+<style type="text/css">
+            #id_user_name
+            {
+              outline: none;
+              border: none;
+              border-bottom: 2px solid blue;
+              border-radius: 10px;
+              text-align: center;
+            }
+
+            #id_user_gender
+            {
+              outline: none;
+              border: none;
+              border-bottom: 2px solid blue;
+              border-radius: 10px;
+              text-align: center;
+            }
+
+            #id_description
+            {
+              outline: none;
+              border: none;
+              border-bottom: 2px solid blue;
+              border-radius: 10px;
+              text-align: center;
+              width: 100%;
+            }
+
+
+        </style>
+
+{% block content %}
+
+<div class="jumbotron">
+            <tr><th><label for="id_user_name">Name:</label></th><td><input type="text" name="user_name" maxlength="100" required id="id_user_name"></td></tr><br><br><br>
+            <tr><th><label for="id_user_gender">User gender:</label></th><td><select name="user_gender" required id="id_user_gender">
+              <option value="" selected>---------</option>
+
+              <option value="F">Female</option>
+
+              <option value="M">Male</option>
+
+          </select></td></tr><br><br><br>
+          <tr><th><label for="id_description">Discription:</label></th><td><input type="text" name="description" maxlength="100" id="id_description"></td></tr>
+
+            <input type="submit" value="Submit" class="btn btn-info "/>
+         </div>
+
+
+
+{% endblock %}

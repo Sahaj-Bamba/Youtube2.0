@@ -26,12 +26,13 @@ SECRET_KEY = '&01+vszx!$&0@1ax8i$_vrabe-=di4)=8u-($+3=mj4((!%bym'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.sites',
     'registration',
     'django.contrib.admin',
@@ -42,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'Account',
-    'video'
+    'video',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +75,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'youtube.wsgi.application'
+ASGI_APPLICATION = 'youtube.routing.application'
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -155,5 +166,3 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'sahajweb1999@gmail.com'
 EMAIL_HOST_PASSWORD = 'web@999@'
 EMAIL_PORT = 587
-
-

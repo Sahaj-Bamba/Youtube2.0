@@ -8,7 +8,15 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.static import serve
 
 from .forms import videoForm, videoData
-from .models import video, tag, videoOrg
+from .models import video, tag, videoOrg, playlist
+
+
+
+def testbase(request):
+
+    # print("khdvjjn")
+
+    return render(request,'video/testbase.html',{})
 
 
 def play(request):
@@ -39,7 +47,6 @@ def add_comment(request):
 
     return JsonResponse(data)
 
-@csrf_exempt
 def comment(request):
 
     print("khdvjjn")
@@ -127,24 +134,121 @@ def download(request):
     return response
 
 
+#   required data name description
+@csrf_exempt
+def createPlaylist(request):
+    if request.method == 'POST':
+        print(request.POST)
+        name = request.POST.get('name')
+        des = request.POST.get('description')
+        x = playlist.objects.filter(name=name).filter(owner=request.user)
+        if len(x) == 0:
+            y = playlist()
+            y.name = name
+            y.description = des
+            y.owner = request.user
+            y.save()
+            data = {
+                'response': 0,
+                'message': "Playlist has "+y.name+" been successfully created"
+            }
+        data = {
+            'response': 1,
+            'message': "There was an error , you have already created a playlist by that name."
+        }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
 
 
+#   required data playlistid videoid
+@csrf_exempt
+def addToPlaylist(request):
+    if request.method == 'POST':
+        print(request.POST)
+        playlistid = request.POST.get('playlistid')
+        videoid = request.POST.get('videoid')
+        vid = video.objects.get(id=videoid)
+        ply = playlist.objects.filter(id=playlistid)
+        ply.videos.add(vid)
+        data = {
+            'response': 0,
+            'message': "Video "+vid.name+" has been successfully added to "+ply.name
+        }
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
 
 
+#   required data
+@csrf_exempt
+def viewAllPlaylist(request):
+    if request.method == 'POST':
+        print(request.POST)
+        ply = playlist.objects.filter(owner=request.user)
+
+        playlists = []
+        ids = []
+
+        for i in ply:
+            playlists.append(i.name)
+            id.append(i.id)
+
+        data = {
+            'response': 0,
+            'ids': ids,
+            'playlists': playlists
+        }
+
+        if len(ply) == 0:
+            data = {
+                'response': 1,
+                'message': "No playlist belong to you"
+            }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
 
 
+#   required data videoid
+@csrf_exempt
+def liked(request):
+    if request.method == 'POST':
+        print(request.POST)
+        videoid = request.POST.get('videoid')
+        vid = video.objects.get(id=videoid)
+        
 
 
+        playlists = []
+        ids = []
 
+        for i in ply:
+            playlists.append(i.name)
+            id.append(i.id)
 
+        data = {
+            'response': 0,
+            'ids': ids,
+            'playlists': playlists
+        }
+
+        if len(ply) == 0:
+            data = {
+                'response': 1,
+                'message': "No playlist belong to you"
+            }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
 
 
 
 #
-
-
 # os.mkdir("hi")
-
 # if form.is_valid():
 #     form.save()
 #     print(form2.name)

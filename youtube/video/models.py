@@ -13,13 +13,14 @@ class videoOrg(models.Model):
 
 class video(models.Model):
     id = models.AutoField(primary_key=True)
-    org = models.ForeignKey(videoOrg, on_delete=models.CASCADE, null=True)
+    org = models.ForeignKey(videoOrg, on_delete=models.SET_NULL, null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
     isPrivate = models.BooleanField(default=False)
     report = models.IntegerField(default=0)
     tags = models.ManyToManyField('tag')
+    viewCount = models.BigIntegerField(default=0)
 
     name = models.CharField(max_length=200, default="")
     description = models.CharField(max_length=500, default="")
@@ -37,7 +38,7 @@ class tag(models.Model):
 class comment(models.Model):
     id = models.AutoField(primary_key=True)
     vidid = models.ForeignKey(video, on_delete=models.CASCADE, null=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     like = models.IntegerField(default=0)
     dislike = models.IntegerField(default=0)
     report = models.IntegerField(default=0)
@@ -47,14 +48,21 @@ class comment(models.Model):
     dislikes = models.ManyToManyField(User,related_name="commentdislikes")
     reports = models.ManyToManyField(User,related_name="commentreports")
 
+
 class connection(models.Model):
     c1 = models.ForeignKey(comment,related_name="parentcomment",on_delete=models.CASCADE)
     c2 = models.ForeignKey(comment,related_name="childcomment",on_delete=models.CASCADE)
 
 
+class playlist(models.Model):
+    id = models.AutoField(primary_key=True)
+    videos = models.ManyToManyField(video,related_name="videos")
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=300)
+    owner = models.ForeignKey(User,on_delete=models.CASCADE)
+
 
 # class subs
-
 #
 # class playlist(models.Model):
 #     name = models.CharField(max_length=500)

@@ -219,31 +219,100 @@ def liked(request):
         print(request.POST)
         videoid = request.POST.get('videoid')
         vid = video.objects.get(id=videoid)
-        
+        flag = 0
+        for i in vid.likes.all():
 
+            # check if current user exist in it and update flag
+            # flag = 1 if present
+            pass
 
-        playlists = []
-        ids = []
-
-        for i in ply:
-            playlists.append(i.name)
-            id.append(i.id)
-
-        data = {
-            'response': 0,
-            'ids': ids,
-            'playlists': playlists
-        }
-
-        if len(ply) == 0:
+        if flag == 0:
+            vid.like += 1
+            vid.likes.add(request.user)
+            vid.save()
             data = {
-                'response': 1,
-                'message': "No playlist belong to you"
+                'response': flag,
+                'message': "done"
+            }
+        else:
+            data = {
+                'response': flag,
+                'message': "already exist"
             }
 
         return JsonResponse(data)
 
     return render(request, 'video/unauthorised.html', {})
+
+#   required data videoid
+@csrf_exempt
+def report(request):
+    if request.method == 'POST':
+        print(request.POST)
+        videoid = request.POST.get('videoid')
+        vid = video.objects.get(id=videoid)
+        flag = 0
+        for i in vid.reports.all():
+
+            # check if current user exist in it and update flag
+            # flag = 1 if present
+            pass
+
+        if flag == 0:
+            vid.report += 1
+            vid.reports.add(request.user)
+            vid.save()
+            data = {
+                'response': flag,
+                'message': "done"
+            }
+        else:
+            data = {
+                'response': flag,
+                'message': "already exist"
+            }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
+
+
+#   required data videoid
+@csrf_exempt
+def dislike(request):
+    if request.method == 'POST':
+        print(request.POST)
+        videoid = request.POST.get('videoid')
+        vid = video.objects.get(id=videoid)
+        flag = 0
+        for i in vid.dislikes.all():
+
+            # check if current user exist in it and update flag
+            # flag = 1 if present
+            pass
+
+        if flag == 0:
+            vid.report += 1
+            vid.dislike.add(request.user)
+            vid.save()
+            data = {
+                'response': flag,
+                'message': "done"
+            }
+        else:
+            data = {
+                'response': flag,
+                'message': "already exist"
+            }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
+
+
+
+
+
 
 
 

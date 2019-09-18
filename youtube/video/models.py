@@ -23,7 +23,9 @@ class video(models.Model):
 
     name = models.CharField(max_length=200, default="")
     description = models.CharField(max_length=500, default="")
-
+    likes = models.ManyToManyField(User,related_name="videolikes")
+    dislikes = models.ManyToManyField(User,related_name="videodislikes")
+    reports = models.ManyToManyField(User,related_name="videoreports")
 
 class tag(models.Model):
     name = models.CharField(max_length=200,unique=True)
@@ -41,10 +43,17 @@ class comment(models.Model):
     report = models.IntegerField(default=0)
     content = models.CharField(max_length=500, default="")
 
+    likes = models.ManyToManyField(User,related_name="commentlikes")
+    dislikes = models.ManyToManyField(User,related_name="commentdislikes")
+    reports = models.ManyToManyField(User,related_name="commentreports")
 
 class connection(models.Model):
-    c1 = models.CharField(max_length=200)
-    c2 = models.CharField(max_length=200)
+    c1 = models.ForeignKey(comment,related_name="parentcomment",on_delete=models.CASCADE)
+    c2 = models.ForeignKey(comment,related_name="childcomment",on_delete=models.CASCADE)
+
+
+
+# class subs
 
 #
 # class playlist(models.Model):

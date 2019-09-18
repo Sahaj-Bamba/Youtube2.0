@@ -19,31 +19,39 @@ def play(request):
     context = {'videofile': vfile , 'MEDIA_URL': "/media/"}
     return render(request,'video/play.html',context)
 
+
 @csrf_exempt
 def add_comment(request):
-    # if request.method == 'GET':
-    #     print("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-    #
-    # print("dieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
-    # pass
+    print("hsdbngvjbnjkbdsnjsdbn")
+    if request.method == 'POST':
+        print("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+        print(request.POST)
+    print("dieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    pass
     # data = ""
     # return render(request, 'video/test2.html', {'data':data})
 
     data = {
-        'is_taken':True
+        'data':1,
+        'cons':2,
+        'message':"caskhbj"
     }
 
     return JsonResponse(data)
 
+@csrf_exempt
 def comment(request):
 
+    print("khdvjjn")
 
     return render(request,'video/comment.html',{})
 
 
 def test(request):
-    data = ""
-    os.system("abc.sh a.mp4 ")
+    # data = ""
+    #print(os.getcwd())
+    #os.chdir(os.getcwd()+"/media/videos")
+    # os.system("./media/videos/abc.sh 32.mp4")
     # # os.system("mkdir hi")
     # # os.system("hello > hi.txt")
     # f = open('media/video/ax.txt', 'r')
@@ -51,7 +59,7 @@ def test(request):
     # data = file_content
     # f.close()
 
-    return render(request, 'video/test2.html', {'data':data})
+    return render(request, 'video/test2.html', {})
 
 
 def upload(request):

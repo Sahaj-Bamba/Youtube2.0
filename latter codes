@@ -3,3 +3,25 @@
 
 
         cmp --silent b.mp4 c.mp4 ^C echo "files are different"
+
+
+
+
+
+
+
+
+
+
+
+
+  # data = ""
+    #print(os.getcwd())
+    #os.chdir(os.getcwd()+"/media/videos")
+    # os.system("./media/videos/abc.sh 32.mp4")
+    # # os.system("mkdir hi")
+    # # os.system("hello > hi.txt")
+    # f = open('media/video/ax.txt', 'r')
+    # file_content = f.read()
+    # data = file_content
+    # f.close()

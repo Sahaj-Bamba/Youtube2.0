@@ -10,6 +10,10 @@
 		Window prompt() Method
 	</h2>
 
+<!--	<form>-->
+<!--		{% csrf_token %}-->
+<!--	</form>-->
+
 	<button onclick="geek()">
 		Click me!
 	</button>
@@ -17,17 +21,52 @@
 
 	<script>
 
-		function load() {
+		// function geek() {
+		//
+		// }
 
-    $.get("video/add_comment",
-    {
-        commentId : "5d752d18a3efe94b60821b02",
-    },
-    function(status) {
+	// $("#edit_comment").click(
+			function geek(){
+				console.log("fgdhjngdf")
+		$.post("/video/add_comment/",
+		{
+			commentId : "5d752d18a3efe94b60821b02",
+			ax : "jdbvnldsvn",
+			hello : "hbkjnsdlbn",
+			hi : "hmdvbklvdsnd"
+		},
+		function(data,status){
+			console.log(status);
+			// res = JSON.parse(data);
+			// console.log(res);
+			console.log(data);
+			// console.log(this.responseText);
+			if(data.data==1)
+			{
+				console.log("hi");
+				alert("you can edit the comment");
+				// document.getElementById("comment_video").disabled = false;
+				// document.getElementById("save_comment").disabled = false;
+				// document.getElementById("edit_comment").disabled = true;
+			}
+			else if(data==-1)
+			{
+				alert("you cannot edit the comment");
+			}
+		});
+	// });
 
-    	console.log("gjafsjysaffsa")
 
-	});
+
+    // $.get("video/add_comment",
+    // {
+    //     commentId : "5d752d18a3efe94b60821b02",
+    // },
+    // function(status) {
+	//
+    // 	console.log("gjafsjysaffsa")
+	//
+	// });
 
    //
 	// $.ajax({
@@ -79,15 +118,15 @@
 			// xhttp.send("PID=Henry&content=Ford&owner=ax&type=1&csrf={{ csrf_token }}");
 		}
 
-		function geek() {
-			load();
-			// var doc = prompt("Please enter some text",
-			// 	"GeeksforGeeks");
-			// if (doc != null) {
-			// 	document.getElementById("g").innerHTML =
-			// 		"Welcome to " + doc;
-			// }
-		}
+		// function geek() {
+		// 	load();
+		// 	// var doc = prompt("Please enter some text",
+		// 	// 	"GeeksforGeeks");
+		// 	// if (doc != null) {
+		// 	// 	document.getElementById("g").innerHTML =
+		// 	// 		"Welcome to " + doc;
+		// 	// }
+		// }
 
 	</script>
 {% endblock %}

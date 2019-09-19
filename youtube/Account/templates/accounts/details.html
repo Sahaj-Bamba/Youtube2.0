@@ -34,20 +34,27 @@
 
 {% block content %}
 
+
 <div class="jumbotron">
-            <tr><th><label for="id_user_name">Name:</label></th><td><input type="text" name="user_name" maxlength="100" required id="id_user_name"></td></tr><br><br><br>
-            <tr><th><label for="id_user_gender">User gender:</label></th><td><select name="user_gender" required id="id_user_gender">
-              <option value="" selected>---------</option>
 
-              <option value="F">Female</option>
+        <<form action="." method="post">{% csrf_token %} 
 
-              <option value="M">Male</option>
+          <tr><th><label for="id_user_name">Name:</label></th><td><input type="text" name="user_name" maxlength="100" required id="id_user_name"></td></tr><br><br><br>
+          <tr><th><label for="id_user_gender">User gender:</label></th><td><select name="user_gender" required id="id_user_gender">
+            <option value="" selected>---------</option>
 
-          </select></td></tr><br><br><br>
-          <tr><th><label for="id_description">Discription:</label></th><td><input type="text" name="description" maxlength="100" id="id_description"></td></tr>
+            <option value="F">Female</option>
 
-            <input type="submit" value="Submit" class="btn btn-info "/>
-         </div>
+            <option value="M">Male</option>
+
+        </select></td></tr><br><br><br>
+        <tr><th><label for="id_description">Discription:</label></th><td><input type="text" name="description" maxlength="100" id="id_description"></td></tr>
+
+          <input type="submit" value="Submit" id="submit" class="btn btn-info "/>
+
+        </form>
+
+</div>
 
 
 

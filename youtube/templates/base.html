@@ -1,317 +1,396 @@
-{% load static %}
-
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css" rel="stylesheet"
-          type="text/css">
-    <title>{% block title %}    {% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
+    <title>SideBar</title>
 
     <style type="text/css">
-    @import url('https://fonts.googleapis.com/css?family=Kodchasan');
-   *{
-       outline: none !important;
-   }
+    @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+    body
+    {
+    font-family: 'Poppins',sans-serif;
+    background: #fafafa;
 
-   body {
-       font-family: 'Kodchasan', sans-serif;
-       /*background: #fafafa;*/
-       scroll-behavior: smooth;
-        }
+    }
+    p
+    {
+    font-family: 'Poppins',sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+    }
+    a,a:hover,a:focus
+    {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+    }
+    .navbar
+    {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+       box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    .navbar-btn
+    {
+    box-shadow: none;
+    border: none;
+    outline: none!important;
+    }
 
-        p {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 300;
-            line-height: 1.7em;
-            color: #999;
-        }
+    .line
+    {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    }
 
-        a, a:hover, a:focus {
-            color: inherit;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
+    .wrapper
+    {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    }
+    #sidebar
+    {
+    min-width: 250px;
+    max-width: 250px;
+    background:#7386D5;
+    color: #fff;
+    transition: all 0.3s;
+    }
+    #sidebar.active
+    {
+    margin-left: -250px;
+    }
+    #sidebar .sidebar-header
+    {
+    padding: 20px;
+    background: #6d7fcc;
+    }
+    #sidebar ul.components
+    {
+    padding: 20px 0px;
+    border-bottom: 1px solid #47748b;
+    }
 
-        .navbar {
-            padding: 15px 10px;
-            background: #fff;
-            border: none;
-            border-radius: 0;
-            margin-bottom: 40px;
-            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-        }
+    #sidebar ul p
+    {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    }
 
-        .navbar-btn {
-            box-shadow: none;
-            border: none;
-            outline: none !important;
-        }
-
-        .line {
-            width: 100%;
-            height: 1px;
-            border-bottom: 1px dashed #ddd;
-        }
-
-        .wrapper {
-            display: flex;
-            width: 100%;
-            align-items: stretch;
-        }
-
-        #sidebar {
-            min-width: 250px;
-            max-width: 250px;
-            background: #7386D5;
-            color: #fff;
-            transition: all 0.3s;
-        }
-
-        #sidebar.active {
-            margin-left: -250px;
-        }
-
-        #sidebar .sidebar-header {
-            padding: 20px;
-            background: #6d7fcc;
-        }
-
-        #sidebar ul.components {
-            padding: 20px 0px;
-            border-bottom: 1px solid #47748b;
-        }
-
-        #sidebar ul p {
-            padding: 10px;
-            font-size: 1.1em;
-            display: block;
-        }
-
-        #sidebar ul li a {
-            padding: 10px;
-            font-size: 1.1em;
-            display: block;
-        }
-
-        #sidebar ul li a:hover {
-            color: #7386D5;
-            background: #fff;
-        }
-
-        #sidebar ul li.active > a, a[aria-expanded="true"] {
-            color: #fff;
-            background: #6d7fcc;
-        }
-
-        a[data-toggle="collpase"] {
+    #sidebar ul li a
+    {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    }
+    .divele
+        {
             position: relative;
-        }
-
-        .dropdown-toggle:after {
-            display: block;
-            position: absolute;
-            top: 60%;
-            right: 20px;
-            transform: translateY(-50%);
-        }
-
-        ul ul a {
-            font-size: 0.9em !important;
-        }
-
-        ul.CTAs {
-            padding: 20px;
-        }
-
-        ul.CTAs a {
-            font-size: 0.9em !important;
-            text-align: center;
-            display: block;
+            border: 1px solid #e9ecef;
             border-radius: 5px;
-            margin-bottom: 5px;
-        }
-
-        a.download {
-            background: #fff;
-            color: #7386D5;
-        }
-
-        a.article, a.article:hover {
-            background: #6d7fcc !important;
-            color: #fff !important;
-        }
-
-        #content {
+            outline: none;
+            background: #e9ecef;
+            height: 10%;
             width: 100%;
-            padding: 20px;
-            min-height: 100vh;
-            transition: all 0.3s;
         }
 
-        @media (max-width: 768px) {
-            #sidebar {
-                margin-left: -250px;
-            }
 
-            #sidebar.active {
-                margin-left: 0px;
-            }
 
-            #sidebarCollpase span {
-                display: none;
-            }
+    #sidebar ul li a:hover
+    {
+           color: #7386D5;
+           background: #fff;
+    }
+        #sidebar ul li.active>a,a[aria-expanded="true"]
+        {
+        color: #fff;
+        background: #6d7fcc;
+        }
+        a[data-toggle="collpase"]
+        {
+        position: relative;
+        }
 
+        .dropdown-toggle:after{
+        display: block;
+        position: absolute;
+        top: 60%;
+        right: 20px;
+        transform: translateY(-50%);
+        }
+
+        ul ul a
+        {
+        font-size: 0.9em !important;
+        }
+
+        ul.CTAs
+        {
+        padding: 20px;
+        }
+
+        ul.CTAs a
+        {
+         font-size: 0.9em !important;
+         text-align: center;
+         display: block;
+         border-radius: 5px;
+         margin-bottom: 5px;
+        }
+
+        a.download
+        {
+        background: #fff;
+        color: #7386D5;
+        }
+        a.article,a.article:hover
+        {
+        background: #6d7fcc !important;
+        color: #fff  !important;
+        }
+
+        #content
+        {
+        width: 100%;
+        padding: 20px;
+        min-height: 100vh;
+        transition: all 0.3s;
+        }
+
+        @media(max-width: 768px)
+        {
+        #sidebar{margin-left: -250px;}
+        #sidebar.active{
+        margin-left: 0px;
+        }
+        #sidebarCollpase span{
+        display: none;
+        }
+
+        }
+
+        .bglight {
+          background-color: #f8f9fa;
         }
 
     </style>
+    <script type="text/javascript">
+        function fun()
+        {
+            var x = document.getElementsByTagName("BODY")[0];
+            // x.style.backgroundColor = "#5A605F";
+            var p = document.getElementById("myselect");
+            var i = p.selectedIndex;
+            if(i==0)
+            {
+              x.style.backgroundColor = "#f8f9fa";
+              var z = document.getElementById("sidebar");
+            var m = document.getElementsByClassName("bglight")[0];
+             var a = document.getElementsByClassName("sidebar-header")[0];
+             z.style.backgroundColor = "#7386D5";
+             m.style.backgroundColor = "#f8f9fa";
+             a.style.backgroundColor = "#7386D5";
+            }
+            else
+            {
+
+            var y = document.getElementById("myselect").value;
+            var z = document.getElementById("sidebar");
+            var m = document.getElementsByClassName("bglight")[0];
+             var a = document.getElementsByClassName("sidebar-header")[0];
+            x.style.backgroundColor = y;
+            z.style.backgroundColor = y;
+            m.style.backgroundColor = y;
+            a.style.backgroundColor = y;
+            }
+            // var z = document.getElementById("sidebar");
+            // var p = document.getElementById("mynav");
+             // var a = document.getElementsByClassName("sidebar-header");
+            // x.style.backgroundColor = y;
+            // z.style.backgroundColor = y;
+            // p.style.backgroundColor = y;
+            // a.style.backgroundColor = y;
 
 
-    {% block statics %}
-    {% endblock %}
-
-
-</head>
-<body>
-<div class="wrapper">
+        }
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
     <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Youtube</h3>
-        </div>
-        <ul class="list-unstyled components">
-            <p>Dummy Heading</p>
-            <li class="active">
-                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#homeSubmenu">Utilities</a>
-                <ul class="collpase  list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="/base/home/">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Trending</a>
-                    </li>
-                    <li>
-                        <a href="#">Subscriptions</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- <li>
+    <div class="sidebar-header">
+    <h3>BOOTSTRAP SIDEBAR</h3>
+    </div>
+    <ul class="list-unstyled components">
+    <p>Dummy Heading</p>
+    <li class="active">
+    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+    <ul class="collpase  list-unstyled" id="homeSubmenu">
+    <li>
+    <a href="#">Home1</a>
+    </li>
+    <li>
+    <a href="#">Home2</a>
+    </li>
+    <li>
+    <a href="#">Home3</a>
+    </li>
+    </ul>
+    </li>
+                <li>
                 <a href="#">About</a>
-            </li> -->
-            <li>
-                <a aria-expanded="false" class="dropdown-toggle" data-toggle="collapse" href="#pageSubmenu">Library</a>
-                <ul class="collpase  list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="#">History</a>
-                    </li>
-                    <li>
-                        <a href="#">Watch Later</a>
-                    </li>
-                    <li>
-                        <a href="#">Liked Vedios</a>
-                    </li>
-                </ul>
-            </li>
-            <!-- <li>
+                </li>
+                <li>
+    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+    <ul class="collpase  list-unstyled" id="pageSubmenu">
+    <li>
+    <a href="#">Page1</a>
+    </li>
+    <li>
+    <a href="#">Page2</a>
+    </li>
+    <li>
+    <a href="#">Page3</a>
+    </li>
+    </ul>
+    </li>
+                <li>
                 <a href="#">Services</a>
-            <!</li> -->
-            <li>
+                </li>
+                <li>
                 <a href="#">Contact Us</a>
+                </li>
+
+    </ul>
+            <ul class="list-unstyled CTAs">
+            <li>
+            <a href="#" class="download">Downlaod Code</a>
+            </li>
+            <li>
+            <a href="#" class="download">Article</a>
             </li>
 
-        </ul>
-        <ul class="list-unstyled CTAs">
-            <li>
-                <a class="download" href="#">Downlaod Code</a>
-            </li>
-            <li>
-                <a class="download" href="#">Article</a>
-            </li>
-
-        </ul>
+            </ul>
 
     </nav>
 
     <div class="content">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="btn btn-info" id="sidebarCollpase">
-                <i aria-hidden="true" class="fa fa-align-justify"></i> <span>Toggle Sidebar</span>
-            </button>
+    <nav class="navbar navbar-expand-lg navbar-light bglight" id="mynav">
+                <button id="sidebarCollpase" class="btn btn-info">
+                <i class="fa fa-align-justify" aria-hidden="true"></i> <span>Toggle Sidebar</span>
+                </button>
 
 
-            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
-            <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-                    data-target="#navbarNav" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item active">
+    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">Features</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">Pricing</a>
+    </li>
+    <li class="nav-item">
+    <select onchange="fun()" id="myselect">
+                              <!-- <option value=""></option> -->
+                              <option value="#f8f9fa">Light</option>
+                              <option value="#5A605F">Dark</option>
+                            </select>
+    </li>
+    </ul>
+    </div>
+    </nav>
 
-                <form class="form-inline my-2 my-lg-0">
-                    <input aria-label="Search" class="form-control mr-sm-2" placeholder="Search" type="search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
 
+    <div class="divele">
+      <img src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="height: 20%; position: relative; left: 0px;"><h3 class="display-6" style="position: relative; top: 0%;">This is the name of the vedio as a result of the search</h3>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <br>
+      <a href="#" class="btn btn-info">Watch</a>
+          <!-- <h3 class="display-6">This is the name of the vedio as a result of the search</h3> -->
+  </div><br><br>
+  <div class="divele">
+      <img src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="height: 20%; position: relative; left: 0px;"><h3 class="display-6" style="position: relative; top: 0%;">This is the name of the vedio as a result of the search</h3>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <br>
+      <a href="#" class="btn btn-info">Watch</a>
+          <!-- <h3 class="display-6">This is the name of the vedio as a result of the search</h3> -->
+  </div><br><br>
+  <div class="divele">
+      <img src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="height: 20%; position: relative; left: 0px;"><h3 class="display-6" style="position: relative; top: 0%;">This is the name of the vedio as a result of the search</h3>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <br>
+      <a href="#" class="btn btn-info">Watch</a>
+          <!-- <h3 class="display-6">This is the name of the vedio as a result of the search</h3> -->
+  </div><br><br>
+  <div class="divele">
+      <img src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="height: 20%; position: relative; left: 0px;"><h3 class="display-6" style="position: relative; top: 0%;">This is the name of the vedio as a result of the search</h3>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <br>
+      <a href="#" class="btn btn-info">Watch</a>
+          <!-- <h3 class="display-6">This is the name of the vedio as a result of the search</h3> -->
+  </div><br><br>
+  <!-- <div class="line">
 
-                {% if user.is_authenticated %}
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Upload Vedio <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Go Live</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Notifications</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li> -->
-                </ul>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/account/login/">Sign in</a>
-                </li>
-                {% endif %}
-
-            </div>
-        </nav>
-
-        <p>Youtube :- Want to watch some crazy stuff or upload some then what are you waiting for fire up that regester button right now and get immersed in our upside down crazy world of fun , adventure and how can I miss it !!! videos... </p>
-        <div class="line">
-            {% block content %}
-
-            {% endblock %}
-        </div>
+  </div> -->
 
     </div>
-</div>
+    </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script crossorigin="anonymous"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollpase').on('click', function () {
+    <script type="text/javascript">
+    $(document).ready(function(){
+          $('#sidebarCollpase').on('click',function(){
             $('#sidebar').toggleClass('active');
-        });
+          });
     });
-</script>
+    </script>
 
-</body>
+  </body>
 </html>

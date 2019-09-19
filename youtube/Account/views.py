@@ -15,22 +15,24 @@ def user_logout(request):
 
 def user_profile(request):
 
-    return render(request, 'accounts/profile.html', {})
+    prof = User_details.objects.get(user_user=request.user)
+    return render(request, 'accounts/profile.html', {'user_name':prof.user_name,'user_gender':prof.user_gender,'description':prof.description } )
 
 def details(request):
+
+    print("details")
+
     if request.method == 'POST':
+
         form = detailsForm(request.POST)
-
         if form.is_valid():
-
             usr_details = User_details()
-            usr_details.user_name = form.user_name
-            usr_details.user_gender = form.user_gender
-            usr_details.description = form.description
+            usr_details.user_name = request.POST.get('user_name')
+            usr_details.user_gender = request.POST.get('user_gender')
+            usr_details.description = request.POST.get('description')
             usr_details.user_user = request.user
             usr_details.save()
-
-            return HttpResponse()
+            return redirect('/base/home/')
 
     else:
             form = detailsForm()

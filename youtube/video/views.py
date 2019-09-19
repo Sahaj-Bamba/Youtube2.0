@@ -47,7 +47,7 @@ def test(request):
     # data = file_content
     # f.close()
 
-    return render(request, 'video/test2.html', {})
+    return render(request, 'video/player.html', {})
 
 
 def upload(request):

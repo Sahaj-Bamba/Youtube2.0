@@ -14,6 +14,7 @@ urlpatterns = [
     # re_path(r'add_comment/$', views.add_comment, name='add_comment'),
     re_path(r'comment/$', views.comment, name='comment'),
     re_path(r'testbase/$', views.testbase, name='testbase'),
+    re_path(r'createPlaylist/$', views.createPlaylist, name='createPlaylist'),
 
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 

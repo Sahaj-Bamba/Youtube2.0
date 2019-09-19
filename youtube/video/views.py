@@ -1,11 +1,9 @@
 import os
 
-from MySQLdb import connections
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.utils.encoding import smart_str
 from django.views.decorators.csrf import csrf_exempt
-from django.views.static import serve
 
 from .forms import videoForm, videoData
 from .models import video, tag, videoOrg, playlist, connection
@@ -23,9 +21,10 @@ def play(request):
     vid = x.get('v')
     vorg = (video.objects.get(id=vid))
     vfile = vorg.org.videofile
-    context = {'videofile': vfile , 'MEDIA_URL': "/media/"}
+    dis = vorg.description
+    name = vorg.name
+    context = {'videofile': vfile , 'MEDIA_URL': "/media/", 'name' : name}
     return render(request,'video/play.html',context)
-
 
 
 def comment(request):
@@ -36,16 +35,16 @@ def comment(request):
 
 
 def test(request):
-    # data = ""
-    #print(os.getcwd())
-    #os.chdir(os.getcwd()+"/media/videos")
-    # os.system("./media/videos/abc.sh 32.mp4")
-    # # os.system("mkdir hi")
-    # # os.system("hello > hi.txt")
-    # f = open('media/video/ax.txt', 'r')
-    # file_content = f.read()
-    # data = file_content
-    # f.close()
+    data = ""
+    print(os.getcwd())
+    print(os.getcwd()+"/youtube/media/videos/")
+    os.system("/youtube/media/videos/abc.sh 32.mp4")
+    # os.system("mkdir hi")
+    # os.system("hello > hi.txt")
+    f = open('youtube/media/video/ax.txt', 'r')
+    file_content = f.read()
+    data = file_content
+    f.close()
 
     return render(request, 'video/player.html', {})
 
@@ -62,11 +61,11 @@ def upload(request):
             # print(x.fields['videofile'].name)
             x.save()
             z = videoOrg.objects.last()
-            os.system("mv youtube/media/\"" + z.videofile.name + "\" youtube/media/videos/" + str(z.id2) + ".mp4")
-            os.system("bash youtube/media/video/abc.sh "+str(z.id2)+" ");
-            f = open('youtube/media/video/ax.txt', 'r')
-            file_content = f.read()
-            f.close()
+            # os.system("mv youtube/media/\"" + z.videofile.name + "\" youtube/media/videos/" + str(z.id2) + ".mp4")
+            # os.system("bash youtube/media/video/abc.sh "+str(z.id2)+" ");
+            # f = open('youtube/media/video/ax.txt', 'r')
+            # file_content = f.read()
+            # f.close()
             z.videofile.name = "videos/" + str(z.id2) + ".mp4"
             z.save()
             form2.save()
@@ -115,7 +114,7 @@ def download(request):
     return response
 
 
-#   required data name description
+#   required data name name description
 @csrf_exempt
 def createPlaylist(request):
     if request.method == 'POST':
@@ -133,10 +132,11 @@ def createPlaylist(request):
                 'response': 0,
                 'message': "Playlist has "+y.name+" been successfully created"
             }
-        data = {
-            'response': 1,
-            'message': "There was an error , you have already created a playlist by that name."
-        }
+        else:
+            data = {
+                'response': 1,
+                'message': "There was an error , you have already created a playlist by that name."
+            }
 
         return JsonResponse(data)
 
@@ -428,11 +428,13 @@ def searchshort(request):
         if len(com) != 0:
             vid = []
             id = []
+            dis = []
             j=0
             for i in com:
                 vid.append(i.name)
                 id.append(i.id)
-                if j == 5:
+                dis.append(i.description)
+                if j == 15:
                     break
                 j += 1
             data = {

@@ -8,8 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.static import serve
 
 from .forms import videoForm, videoData
-from .models import video, tag, videoOrg, playlist
-
+from .models import video, tag, videoOrg, playlist, connection
 
 
 def testbase(request):
@@ -28,24 +27,6 @@ def play(request):
     return render(request,'video/play.html',context)
 
 
-@csrf_exempt
-def add_comment(request):
-    print("hsdbngvjbnjkbdsnjsdbn")
-    if request.method == 'POST':
-        print("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-        print(request.POST)
-    print("dieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
-    pass
-    # data = ""
-    # return render(request, 'video/test2.html', {'data':data})
-
-    data = {
-        'data':1,
-        'cons':2,
-        'message':"caskhbj"
-    }
-
-    return JsonResponse(data)
 
 def comment(request):
 
@@ -308,6 +289,140 @@ def dislike(request):
         return JsonResponse(data)
 
     return render(request, 'video/unauthorised.html', {})
+
+
+#   required data videoid , content
+@csrf_exempt
+def addComment(request):
+    if request.method == 'POST':
+        print(request.POST)
+        videoid = request.POST.get('videoid')
+        con = request.POST.get('content')
+        vid = video.objects.get(id=videoid)
+        com = comment()
+        com.vidid = vid
+        com.owner = request.user
+        com.content = con
+        com.save()
+
+        data = {
+            'response': 0,
+            'message': "comment added"
+        }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
+
+
+#   required data commentid , content
+@csrf_exempt
+def addReply(request):
+    if request.method == 'POST':
+        print(request.POST)
+        con = request.POST.get('content')
+        cx = request.POST.get('commentid')
+        com = comment()
+        com.owner = request.user
+        com.content = con
+        com.save()
+        cp = comment.objects.last()
+        c = connection()
+        c.c1 = cx
+        c.c2 = c.id
+        c.save()
+        data = {
+            'response': 0,
+            'message': "comment added"
+        }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
+
+
+#   required data commentid , content
+@csrf_exempt
+def deletecomment(request):
+    if request.method == 'POST':
+        print(request.POST)
+        con = request.POST.get('content')
+        cx = request.POST.get('commentid')
+        com = comment()
+        com.owner = request.user
+        com.content = con
+        com.save()
+        cp = comment.objects.last()
+        c = connection()
+        c.c1 = cx
+        c.c2 = c.id
+        c.save()
+        data = {
+            'response': 0,
+            'message': "comment added"
+        }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
+
+
+#   required data commentid , content
+@csrf_exempt
+def editcomment(request):
+    if request.method == 'POST':
+        print(request.POST)
+        con = request.POST.get('content')
+        cx = request.POST.get('commentid')
+        com = comment.objects.get(id=cx)
+        if com.owner == request.user:
+            com.content = con
+            com.save()
+            data = {
+                'response': 0,
+                'message': "comment editted"
+            }
+        else:
+            data = {
+                'response': 1,
+                'message': "you are not authorised to edit comments"
+            }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
+
+
+#   required data commentid
+@csrf_exempt
+def deletecomment(request):
+    if request.method == 'POST':
+        print(request.POST)
+        con = request.POST.get('content')
+        cx = request.POST.get('commentid')
+        com = comment.objects.get(id=cx)
+        if com.owner == request.user:
+            com.delete()
+            data = {
+                'response': 0,
+                'message': "comment deleted"
+            }
+        else:
+            data = {
+                'response': 1,
+                'message': "you are not authorised to delete comments"
+            }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
+
+
+
+
+
+
+
 
 
 

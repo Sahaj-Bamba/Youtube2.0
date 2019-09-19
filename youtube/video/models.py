@@ -48,7 +48,7 @@ class comment(models.Model):
     dislikes = models.ManyToManyField(User,related_name="commentdislikes")
     reports = models.ManyToManyField(User,related_name="commentreports")
 
-
+# c1 is parent c2 is child
 class connection(models.Model):
     c1 = models.ForeignKey(comment,related_name="parentcomment",on_delete=models.CASCADE)
     c2 = models.ForeignKey(comment,related_name="childcomment",on_delete=models.CASCADE)

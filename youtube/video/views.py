@@ -418,6 +418,39 @@ def deletecomment(request):
     return render(request, 'video/unauthorised.html', {})
 
 
+#   required data content
+@csrf_exempt
+def searchshort(request):
+    if request.method == 'POST':
+        print(request.POST)
+        con = request.POST.get('content')
+        com = video.objects.filter(name__contains="%"+con+"%")
+        if len(com) != 0:
+            vid = []
+            id = []
+            j=0
+            for i in com:
+                vid.append(i.name)
+                id.append(i.id)
+                if j == 5:
+                    break
+                j += 1
+            data = {
+                'response': 0,
+                "videoName": vid,
+                "videoId": id
+            }
+        else:
+            data = {
+                'response': 1,
+                'message': "No videos meet your criteria"
+            }
+
+        return JsonResponse(data)
+
+    return render(request, 'video/unauthorised.html', {})
+
+
 
 
 
